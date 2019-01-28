@@ -35,7 +35,7 @@ module.exports = function (app) {
         var closestMatch = 0;
 
         // sets the starting point of min. difference between scores
-        var smallestDiff = 51;
+        var currentLowDiff = 50;
 
         // goes through each score of each potential match to find the difference 
         // then and adds the difference of each score to the userDiff at the end of each iteration
@@ -48,16 +48,15 @@ module.exports = function (app) {
 
             // then compares the total difference (userDiff) with the current smallest difference. 
             // if the difference is less than the old difference value, sets the new closest match until a new min. difference is found
-            if (userDiff < smallestDiff) {
+            if (userDiff < currentLowDiff) {
                 closestMatch = i;
-                console.log(closestMatch);
-                smallestDiff = userDiff;
-                console.log(userDiff);
+                currentLowDiff = userDiff;
             }
         }
 
         // adds the user's info to the userDataArray array
         userDataArray.push(user);
+        console.log("~~~~~You matched with " + userDataArray[closestMatch].name + "~~~~~");
 
 
         // returns the closest match as part of the post request
